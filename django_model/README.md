@@ -1,4 +1,4 @@
-# LibraryProject - Book Store App
+s# LibraryProject - Book Store App
 
 This is a simple Django project for learning how to build a bookstore application.
 
