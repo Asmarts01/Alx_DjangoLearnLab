@@ -9,7 +9,7 @@ from relationship_app.models import Author, Book, Library, Librarian
 def books_by_author(author_name):
     try:
         author = Author.objects.get(name=author_name)
-        books= author.books.through.object.filter(author=author)
+        books= author.books.all()
         return books
     except Author.DoesNotExist:
         return []
