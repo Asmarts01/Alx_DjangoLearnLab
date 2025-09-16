@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import DetailView
-from relationship_app.models import Book, Library
+from relationship_app.models import Book
+from relationship_app.models import Library
 
 
 # Function-based view (renders in template)
