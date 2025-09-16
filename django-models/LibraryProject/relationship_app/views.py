@@ -9,7 +9,7 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Function-based view (renders in template)
 def list_books(request):
@@ -66,3 +66,15 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
+
+def is_librarian(user):
+    return user.userprofile.role == 'Librarian'
+
+@login_required
+def list_books(request):
+    books = Book.objects.all()
+    return render(request, 'relationship_app/list_books.html', {'books': books})
+
+@user_passes_test(is_librarian)
+def librarian_view(request):
+    return HttpResponse("Welcome, Librarian! You have access to this view.")
