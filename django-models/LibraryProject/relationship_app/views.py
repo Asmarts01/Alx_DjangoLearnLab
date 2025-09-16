@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from django.views.generic.detail import DetailView
 from relationship_app.models import Book
 from .models import Library
+from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 
 # Function-based view (renders in template)
@@ -28,3 +32,35 @@ class LibraryDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['books'] = self.object.books.all() 
         return context
+
+# User Registration View
+def register_view(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            messages.success(request, "Registration successful. You can now log in.")
+            return redirect("login")
+    else:
+        form = UserCreationForm()
+    return render(request, "relationship_app/register.html", {"form": form})
+
+
+# User Login View
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect("list_books")  # Redirect after login
+        else:
+            messages.error(request, "Invalid username or password.")
+    return render(request, "relationship_app/login.html")
+
+
+# User Logout View
+def logout_view(request):
+    logout(request)
+    return redirect("login")
