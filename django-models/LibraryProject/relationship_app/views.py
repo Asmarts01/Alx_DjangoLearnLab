@@ -4,7 +4,9 @@ from django.views.generic.detail import DetailView
 from relationship_app.models import Book
 from .models import Library
 from django.shortcuts import redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
+from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
