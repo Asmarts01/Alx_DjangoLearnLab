@@ -1,6 +1,7 @@
-"""
-URL configuration for LibraryProject project.
+# Edit relationship_app/urls.py to include URL patterns that route to the newly created views. 
+# Make sure to link both the function-based and class-based views.
 
+"""LibraryProject URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
 Examples:
@@ -14,9 +15,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
-
+from relationship_app.views import list_books, LibraryDetailView, list_books_text
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('books/', list_books, name='list_books'),
+    path('books/text/', list_books_text, name='list_books_text'),
+    path('library/<int:pk>/', LibraryDetailView.as_view(), name='library_detail'),
 ]
