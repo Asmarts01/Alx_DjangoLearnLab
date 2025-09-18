@@ -15,6 +15,10 @@ from django.contrib.auth.decorators import permission_required
 from .models import Book
 from django.shortcuts import get_object_or_404
 
+
+def index(request):
+    return HttpResponse("Hello from relationship_app!")
+
 # Function-based view (renders in template)
 def list_books(request):
     books = Book.objects.all()

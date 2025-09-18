@@ -5,6 +5,8 @@ from .views import list_books, list_books_text, LibraryDetailView, librarian_vie
 
 
 urlpatterns = [
+
+    path('', views.index, name='relationship_index'),
     # Book Views
     path('books/', views.list_books, name='list_books'),
     path('books/text/', views.list_books_text, name='list_books_text'),
