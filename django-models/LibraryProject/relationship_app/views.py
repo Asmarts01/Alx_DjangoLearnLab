@@ -11,6 +11,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .decorators import role_required
+from django.contrib.auth.decorators import permission_required
+from .models import Book
+from django.shortcuts import get_object_or_404
 
 # Function-based view (renders in template)
 def list_books(request):
@@ -91,3 +94,30 @@ def librarian_view(request):
 @role_required('Member')
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
+
+@permission_required('relationship_app.can_create_book')
+def create_book(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        author = request.POST.get('author')
+        Book.objects.create(title=title, author=author)
+        return redirect('list_books')
+    return render(request, 'relationship_app/create_book.html')
+
+@permission_required('relationship_app.can_update_book')
+def update_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    if request.method == 'POST':
+        book.title = request.POST.get('title')
+        book.author = request.POST.get('author')
+        book.save()
+        return redirect('list_books')
+    return render(request, 'relationship_app/update_book.html', {'book': book})
+
+@permission_required('relationship_app.can_delete_book')
+def delete_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    if request.method == 'POST':
+        book.delete()
+        return redirect('list_books')
+    return render(request, 'relationship_app/delete_book.html', {'book': book})
