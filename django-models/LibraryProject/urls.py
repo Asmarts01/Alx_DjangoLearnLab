@@ -16,10 +16,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+# LibraryProject/urls.py
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("<h1>Welcome to the Library Project </h1><p>Use the menu to explore Relationship apps.</p>")
 
 urlpatterns = [
+    
     path('admin/', admin.site.urls),
     path('relationship/', include('relationship_app.urls')),
+    path('', home, name='home'),
 ]
