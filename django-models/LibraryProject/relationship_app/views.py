@@ -95,14 +95,14 @@ def librarian_view(request):
 def member_view(request):
     return render(request, 'relationship_app/member_view.html')
 
-@permission_required('relationship_app.can_create_book')
-def create_book(request):
+@permission_required('relationship_app.can_add_book')
+def add_book(request):
     if request.method == 'POST':
         title = request.POST.get('title')
         author = request.POST.get('author')
         Book.objects.create(title=title, author=author)
         return redirect('list_books')
-    return render(request, 'relationship_app/create_book.html')
+    return render(request, 'relationship_app/add_book.html')
 
 @permission_required('relationship_app.can_update_book')
 def update_book(request, book_id):
