@@ -107,8 +107,8 @@ LOGIN_REDIRECT_URL = "list_books"
 LOGOUT_REDIRECT_URL = "login"
 
 # Custom user model
-AUTH_USER_MODEL = 'accounts.CustomUser'
-  
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
