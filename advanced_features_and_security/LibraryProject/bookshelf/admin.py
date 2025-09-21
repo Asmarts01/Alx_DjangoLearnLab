@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.utils.translation import gettext_lazy as _
 from .models import CustomUser
 
-
+@admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
     # Fields to display in the admin user list
     list_display = ("username", "email", "date_of_birth", "is_staff", "is_superuser")
@@ -25,6 +26,8 @@ class CustomUserAdmin(UserAdmin):
         }),
     )
 
+search_fields = ("username", "email")
+ordering = ("username",)
 
 # Register your custom user model with the custom admin
 admin.site.register(CustomUser, CustomUserAdmin)
