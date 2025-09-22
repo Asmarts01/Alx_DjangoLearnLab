@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.conf import settings
 
 
 # --------------------------
@@ -50,9 +51,19 @@ class CustomUser(AbstractUser):
         return self.username
 
 class Book(models.Model):
-    title = models.CharField(max_length=200)
-    author = models.CharField(max_length=100)
+    title = models.CharField(max_length=225)
+    author = models.CharField(max_length=225)
     publication_year = models.IntegerField()
+    isbn = models.CharField(max_length=13, unique=True)
+    added_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
+    class Meta:
+        permissions = [
+            ("can_view" , "Can view book details"),
+            ("can_edit" , "Can edit book details"),
+            ("can_delete" , "Can delete book"),
+            ("can_create" , "Can create new book"),
+        ]
 
     def __str__(self):
         return f"{self.title} by {self.author} ({self.publication_year})"
