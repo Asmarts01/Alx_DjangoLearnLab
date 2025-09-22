@@ -18,7 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse
-from bookshelf import views
+from django.contrib.auth import views as auth_views
 
 def home(request):
     return HttpResponse("<h1>Welcome to the Library Project </h1><p>Use the menu to explore Relationship apps.</p>")
@@ -27,9 +27,8 @@ urlpatterns = [
     
     path('admin/', admin.site.urls),
     path('relationship/', include('relationship_app.urls')),
+    path('', include('bookshelf.urls')),
     path('', home, name='home'),
-    path('books/', views.book_list, name='book_list'),
-    path('books/create/', views.book_create, name='book_create'),
-    path('books/edit/', views.book_edit, name='book_edit'),
-    path('books/delete/', views.book_delete, name='book_delete'),
+    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
+    path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]
