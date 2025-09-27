@@ -132,7 +132,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Define allowed hosts for production
-ALLOWED_HOSTS = ['localhost', 'wwww.localhost.com']
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Security settings for middleware
 SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -144,7 +144,7 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
 # HSTS settings
-SECURE_HSTS_SECONDS = 31564800  # 1 year
+SECURE_HSTS_SECONDS = 31536000  # 1 year
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 

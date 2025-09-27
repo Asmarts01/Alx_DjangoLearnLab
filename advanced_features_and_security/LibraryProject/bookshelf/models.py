@@ -55,7 +55,7 @@ class Book(models.Model):
     author = models.CharField(max_length=225)
     publication_year = models.IntegerField()
     isbn = models.CharField(max_length=13, unique=True)
-    added_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    added_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         permissions = [
