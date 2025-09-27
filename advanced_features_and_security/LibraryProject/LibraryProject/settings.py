@@ -151,6 +151,8 @@ SECURE_HSTS_PRELOAD = True
 # SSL redirect
 SECURE_SSL_REDIRECT = True
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 DEBUG = False
 # End of settings.py
 # Additional security settings for production
