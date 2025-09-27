@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import permission_required
 from .models import Book
 from .forms import BookSearchForm
+from .forms import ExampleForm 
 
 
 # View that requires the "can_view" permission
@@ -51,3 +52,17 @@ def book_search(request):
         if query:
             books = Book.objects.filter(title__icontains=query)
     return render(request, "bookshelf/book_search.html", {"form": form, "books": books})
+
+# ALX Required ExampleForm usage
+
+def example_form_view(request):
+    if request.method == "POST":
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data.get("name")
+            email = form.cleaned_data.get("email")
+            # Render success page with submitted data
+            return render(request, "bookshelf/example_success.html", {"name": name, "email": email})
+    else:
+        form = ExampleForm()
+    return render(request, "bookshelf/example_form.html", {"form": form})

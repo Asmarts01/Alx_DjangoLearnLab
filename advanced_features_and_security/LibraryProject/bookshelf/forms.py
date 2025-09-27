@@ -1,8 +1,25 @@
+# bookshelf/forms.py
 from django import forms
-from .models import Book
 
-# ExampleForm that uses the Book model
-class ExampleForm(forms.ModelForm):
-    class Meta:
-        model = Book
-        fields = ["title"]  # include fields you want the form to handle
+# Required by ALX
+class ExampleForm(forms.Form):
+    name = forms.CharField(
+        label="Name",
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={"placeholder": "Enter your name"})
+    )
+    email = forms.EmailField(
+        label="Email",
+        required=True,
+        widget=forms.EmailInput(attrs={"placeholder": "Enter your email"})
+    )
+
+# Used in your project
+class BookSearchForm(forms.Form):
+    q = forms.CharField(
+        label="Search Books",
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(attrs={"placeholder": "Enter book title"})
+    )
