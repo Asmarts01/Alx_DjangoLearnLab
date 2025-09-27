@@ -150,3 +150,8 @@ SECURE_HSTS_PRELOAD = True
 
 # SSL redirect
 SECURE_SSL_REDIRECT = True
+
+DEBUG = False
+# End of settings.py
+# Additional security settings for production
+
