@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sslserver',    # For local HTTPS during development
-    'rest_framework'  
+    'sslserver',    # For local HTTPS during development  
     'bookshelf',
     'relationship_app',
     'accounts',
